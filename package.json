@@ -1,5 +1,5 @@
 {
-  "name": "cdk-lerna-example",
+  "name": "sst-openid-wrapper",
   "version": "1.0.0",
   "main": "index.js",
   "author": "alpaca-backend",
@@ -11,5 +11,7 @@
     ]
   },
   "scripts": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
 }

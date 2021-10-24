@@ -1,5 +1,5 @@
 {
-  "name": "rest-api",
+  "name": "@sst-openid-wrapper/sst-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@serverless-stack/cli": "0.48.0",
-    "@serverless-stack/resources": "0.48.0"
+    "@serverless-stack/resources": "0.48.0",
+    "@sst-openid-wrapper/github-cognito-openid-wrapper": "^1.2.0"
   }
 }
