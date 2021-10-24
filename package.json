@@ -1,0 +1,15 @@
+{
+  "name": "cdk-lerna-example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "alpaca-backend",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "scripts": {},
+  "devDependencies": {}
+}
