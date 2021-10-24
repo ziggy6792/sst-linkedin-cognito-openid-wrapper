@@ -14,3 +14,16 @@
 
 # sst build output
 **/.build
+
+**/node_modules
+**/coverage
+**/pacts
+**/dist-web
+**/dist-lambda
+**/logs
+
+**/config.sh
+**/*.key
+**/*.key.pub
+**/serverless-output.yml
+**/package-lock.json
