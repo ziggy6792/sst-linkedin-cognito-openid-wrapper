@@ -1,49 +1,47 @@
 /* eslint-disable no-console */
 const logger = require('./connectors/logger');
-const { NumericDate } = require('./helpers');
 const crypto = require('./crypto');
-const github = require('./github');
 const linkedin = require('./linkedin');
 
 const getJwks = () => ({ keys: [crypto.getPublicKey()] });
 
-const getUserInfo = accessToken => {
-  console.log('getUserInfo', accessToken);
-  return Promise.all([
-    github()
+const getUserInfo = accessToken =>
+  Promise.all([
+    linkedin()
       .getUserDetails(accessToken)
       .then(userDetails => {
         logger.debug('Fetched user details: %j', userDetails, {});
-        // Here we map the github user response to the standard claims from
+        // Here we map the linkedin user response to the standard claims from
         // OpenID. The mapping was constructed by following
-        // https://developer.github.com/v3/users/
-        // and http://openid.net/specs/openid-connect-core-1_0.html#StandardClaims
+        // https://docs.microsoft.com/en-us/linkedin/shared/integrations/people/profile-api?context=linkedin/consumer/context
+        // and
+        // https://docs.microsoft.com/en-us/linkedin/shared/references/v2/profile/lite-profile
+        const picture =
+          userDetails.profilePicture['displayImage~'].elements[1].identifiers[0]
+            .identifier;
         const claims = {
           sub: `${userDetails.id}`, // OpenID requires a string
-          name: userDetails.name,
-          preferred_username: userDetails.login,
-          profile: userDetails.html_url,
-          picture: userDetails.avatar_url,
-          website: userDetails.blog,
-          updated_at: NumericDate(
-            // OpenID requires the seconds since epoch in UTC
-            new Date(Date.parse(userDetails.updated_at))
-          )
+          firstName: `${userDetails.localizedFirstName}`,
+          lastName: `${userDetails.localizedLastName}`,
+          picture
         };
         logger.debug('Resolved claims: %j', claims, {});
         return claims;
       }),
-    github()
+    linkedin()
       .getUserEmails(accessToken)
       .then(userEmails => {
         logger.debug('Fetched user emails: %j', userEmails, {});
-        const primaryEmail = userEmails.find(email => email.primary);
+        const primaryEmail = userEmails.elements.find(
+          email => email.primary && email.type === 'EMAIL'
+        );
         if (primaryEmail === undefined) {
           throw new Error('User did not have a primary email address');
         }
+        const { emailAddress } = primaryEmail['handle~'];
         const claims = {
-          email: primaryEmail.email,
-          email_verified: primaryEmail.verified
+          email: emailAddress,
+          email_verified: true
         };
         logger.debug('Resolved claims: %j', claims, {});
         return claims;
@@ -56,7 +54,6 @@ const getUserInfo = accessToken => {
     logger.debug('Resolved combined claims: %j', mergedClaims, {});
     return mergedClaims;
   });
-};
 
 const getAuthorizeUrl = (client_id, scope, state, response_type) =>
   linkedin().getAuthorizeUrl(client_id, scope, state, response_type);
