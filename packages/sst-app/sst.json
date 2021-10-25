@@ -1,5 +1,5 @@
 {
-  "name": "rest-api",
+  "name": "cognito-openid-wrapper",
   "region": "ap-southeast-1",
   "main": "stacks/index.js"
 }

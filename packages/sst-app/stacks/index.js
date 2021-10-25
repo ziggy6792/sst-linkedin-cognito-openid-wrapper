@@ -1,7 +1,7 @@
-import MyStack from "./MyStack";
+import MyStack from './MyStack';
 
 export default function main(app) {
-  new MyStack(app, "my-stack");
+  new MyStack(app, 'stack');
 
   // Add more stacks
 }
