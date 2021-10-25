@@ -2,6 +2,7 @@
   "name": "@sst-openid-wrapper/sst-app",
   "version": "0.1.0",
   "private": true,
+  "main": "stacks/index.js",
   "scripts": {
     "test": "sst test",
     "start": "sst start",
@@ -12,11 +13,13 @@
   "eslintConfig": {
     "extends": [
       "serverless-stack"
+    ],
+    "ignorePatterns": [
+      "dist-lambda/*"
     ]
   },
   "dependencies": {
     "@serverless-stack/cli": "0.48.0",
-    "@serverless-stack/resources": "0.48.0",
-    "@sst-openid-wrapper/github-cognito-openid-wrapper": "^1.2.0"
+    "@serverless-stack/resources": "0.48.0"
   }
 }

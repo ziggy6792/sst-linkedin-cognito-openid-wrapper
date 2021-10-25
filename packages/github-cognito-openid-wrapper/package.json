@@ -27,6 +27,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sst-openid-wrapper/sst-app": "^0.1.0",
     "axios": "^0.21.1",
     "body-parser": "^1.18.3",
     "colors": "^1.3.2",

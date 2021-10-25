@@ -1,5 +1,6 @@
 const NodemonPlugin = require('nodemon-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
+const path = require('path');
 
 const baseConfig = {
   mode: 'development',
@@ -27,6 +28,26 @@ const baseConfig = {
 };
 
 const config = [
+  {
+    ...baseConfig,
+    output: {
+      libraryTarget: 'commonjs2',
+      path: path.join(
+        require.resolve('@sst-openid-wrapper/sst-app'),
+        '..',
+        '..',
+        '/dist-lambda'
+      ),
+      filename: '[name].js'
+    },
+    entry: {
+      openIdConfiguration: './src/connectors/lambda/open-id-configuration.js',
+      token: './src/connectors/lambda/token.js',
+      userinfo: './src/connectors/lambda/userinfo.js',
+      jwks: './src/connectors/lambda/jwks.js',
+      authorize: './src/connectors/lambda/authorize.js'
+    }
+  },
   {
     ...baseConfig,
     output: {

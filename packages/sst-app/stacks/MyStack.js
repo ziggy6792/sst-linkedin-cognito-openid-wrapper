@@ -1,16 +1,16 @@
-import * as sst from "@serverless-stack/resources";
+import * as sst from '@serverless-stack/resources';
 
 export default class MyStack extends sst.Stack {
   constructor(scope, id, props) {
     super(scope, id, props);
 
     // Create the HTTP API
-    const api = new sst.Api(this, "Api", {
+    const api = new sst.Api(this, 'Api', {
       routes: {
-        "GET /notes": "src/list.main",
-        "GET /more-notes": "src/list.main",
-        "GET /notes/{id}": "src/get.main",
-        "PUT /notes/{id}": "src/update.main",
+        'GET /authorize': 'dist-lambda/authorize.handler',
+        'GET /more-notes': 'src/list.main',
+        'GET /notes/{id}': 'src/get.main',
+        'PUT /notes/{id}': 'src/update.main',
       },
     });
 
