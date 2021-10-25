@@ -61,19 +61,11 @@ const getUserInfo = accessToken => {
 const getAuthorizeUrl = (client_id, scope, state, response_type) =>
   linkedin().getAuthorizeUrl(client_id, scope, state, response_type);
 
-const getTokens = (code, state, host) => {
-  console.log('getTokens', code, state, host);
-  return github()
+const getTokens = (code, state, host) =>
+  linkedin()
     .getToken(code, state)
-    .then(githubToken => {
-      logger.debug('Got token: %s', githubToken, {});
-      // GitHub returns scopes separated by commas
-      // But OAuth wants them to be spaces
-      // https://tools.ietf.org/html/rfc6749#section-5.1
-      // Also, we need to add openid as a scope,
-      // since GitHub will have stripped it
-      const scope = `openid ${githubToken.scope.replace(',', ' ')}`;
-
+    .then(linkedinToken => {
+      logger.debug('Got token: %s', linkedinToken, {});
       // ** JWT ID Token required fields **
       // iss - issuer https url
       // aud - audience that this token is valid for (LINKEDIN_CLIENT_ID)
@@ -92,8 +84,7 @@ const getTokens = (code, state, host) => {
 
         const idToken = crypto.makeIdToken(payload, host);
         const tokenResponse = {
-          ...githubToken,
-          scope,
+          ...linkedinToken,
           id_token: idToken
         };
 
@@ -102,7 +93,6 @@ const getTokens = (code, state, host) => {
         resolve(tokenResponse);
       });
     });
-};
 
 const getConfigFor = host => ({
   issuer: `https://${host}`,
