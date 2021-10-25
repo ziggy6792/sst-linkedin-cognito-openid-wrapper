@@ -1,16 +1,35 @@
 import * as sst from '@serverless-stack/resources';
 
+// export GITHUB_CLIENT_ID=e049ba5bcab28d595dc6
+// export GITHUB_CLIENT_SECRET=746cf476d723d71b7fdaf203e7a9efa40a53af80
+// export COGNITO_REDIRECT_URI=https://alpaca-backend-staging.auth.ap-southeast-1.amazoncognito.com/oauth2/idpresponse
+// export GITHUB_API_URL=https://api.github.com
+// export GITHUB_LOGIN_URL=https://github.com
+
 export default class MyStack extends sst.Stack {
   constructor(scope, id, props) {
     super(scope, id, props);
 
     // Create the HTTP API
     const api = new sst.Api(this, 'Api', {
+      defaultFunctionProps: {
+        timeout: 20,
+        environment: {
+          GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
+          GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
+          COGNITO_REDIRECT_URI: process.env.COGNITO_REDIRECT_URI,
+          GITHUB_API_URL: process.env.GITHUB_API_URL,
+          GITHUB_LOGIN_URL: process.env.GITHUB_LOGIN_URL,
+        },
+      },
       routes: {
+        'GET /.well-known/openid-configuration': 'dist-lambda/openIdConfiguration.handler',
         'GET /authorize': 'dist-lambda/authorize.handler',
-        'GET /more-notes': 'src/list.main',
-        'GET /notes/{id}': 'src/get.main',
-        'PUT /notes/{id}': 'src/update.main',
+        'GET /token': 'dist-lambda/token.handler',
+        'POST /token': 'dist-lambda/token.handler',
+        'GET /userinfo': 'dist-lambda/userinfo.handler',
+        'POST /userinfo': 'dist-lambda/userinfo.handler',
+        'GET /.well-known/jwks.json': 'dist-lambda/jwks.handler',
       },
     });
 

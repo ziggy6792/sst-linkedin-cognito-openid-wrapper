@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-    Github Cognito OpenID Wrapper (SSO)
+  Github Cognito OpenID Wrapper (SSO)
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -30,11 +30,11 @@ Parameters:
     Type: String
   GitHubUrlParameter:
     Type: String
-    Default: "https://api.github.com"
+    Default: 'https://api.github.com'
     MinLength: 1
   GitHubLoginUrlParameter:
     Type: String
-    Default: "https://github.com"
+    Default: 'https://github.com'
     MinLength: 1
   StageNameParameter:
     Type: String
@@ -44,7 +44,7 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: !Ref StageNameParameter
-      OpenApiVersion: "2.0"
+      OpenApiVersion: '2.0'
   OpenIdDiscovery:
     Type: AWS::Serverless::Function
     Properties:
@@ -119,6 +119,6 @@ Resources:
             RestApiId: !Ref GithubOAuthApi
 
 Outputs:
-    GitHubShimIssuer:
-      Description: "GitHub OpenID Shim Issuer"
-      Value: !Sub "https://${GithubOAuthApi}.execute-api.${AWS::Region}.amazonaws.com/${StageNameParameter}"
+  GitHubShimIssuer:
+    Description: 'GitHub OpenID Shim Issuer'
+    Value: !Sub 'https://${GithubOAuthApi}.execute-api.${AWS::Region}.amazonaws.com/${StageNameParameter}'
