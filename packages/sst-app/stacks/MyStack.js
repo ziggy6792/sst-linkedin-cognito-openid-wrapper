@@ -20,6 +20,7 @@ export default class MyStack extends sst.Stack {
           COGNITO_REDIRECT_URI: process.env.COGNITO_REDIRECT_URI,
           LINKEDIN_API_URL: process.env.LINKEDIN_API_URL,
           LINKEDIN_LOGIN_URL: process.env.LINKEDIN_LOGIN_URL,
+          LINKEDIN_SCOPE: process.env.LINKEDIN_SCOPE,
         },
       },
       routes: {

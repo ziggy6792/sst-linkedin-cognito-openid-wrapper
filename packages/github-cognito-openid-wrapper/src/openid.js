@@ -3,6 +3,7 @@ const logger = require('./connectors/logger');
 const { NumericDate } = require('./helpers');
 const crypto = require('./crypto');
 const github = require('./github');
+const linkedin = require('./linkedin');
 
 const getJwks = () => ({ keys: [crypto.getPublicKey()] });
 
@@ -58,7 +59,7 @@ const getUserInfo = accessToken => {
 };
 
 const getAuthorizeUrl = (client_id, scope, state, response_type) =>
-  github().getAuthorizeUrl(client_id, scope, state, response_type);
+  linkedin().getAuthorizeUrl(client_id, scope, state, response_type);
 
 const getTokens = (code, state, host) => {
   console.log('getTokens', code, state, host);
