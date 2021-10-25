@@ -4,9 +4,15 @@ const auth = require('./util/auth');
 const controllers = require('../controllers');
 
 const parseBody = event => {
-  const contentType = event.headers['Content-Type'];
+  const contentType =
+    event.headers['Content-Type'] || event.headers['content-type'];
   if (event.body) {
     if (contentType.startsWith('application/x-www-form-urlencoded')) {
+      if (event.isBase64Encoded) {
+        const buff = Buffer.from(event.body, 'base64');
+        const text = buff.toString('utf-8');
+        return qs.parse(text);
+      }
       return qs.parse(event.body);
     }
     if (contentType.startsWith('application/json')) {
@@ -27,7 +33,7 @@ module.exports.handler = (event, context, callback) => {
     code,
     state,
     auth.getIssuer(
-      event.headers.Host,
+      event.headers.Host || event.headers.host,
       event.requestContext && event.requestContext.stage
     )
   );

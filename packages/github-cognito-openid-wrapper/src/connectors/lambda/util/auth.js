@@ -4,7 +4,7 @@ module.exports = {
   getBearerToken: req =>
     new Promise((resolve, reject) => {
       // This method implements https://tools.ietf.org/html/rfc6750
-      const authHeader = req.headers.Authorization;
+      const authHeader = req.headers.Authorization || req.headers.authorization;
       logger.debug('Detected authorization header %s', authHeader);
       if (authHeader) {
         // Section 2.1 Authorization request header
@@ -37,6 +37,9 @@ module.exports = {
     }),
 
   getIssuer: (host, stage) => {
+    if (stage === '$default') {
+      return host;
+    }
     const lStage = stage;
     const issuer = `${host}/${lStage}`;
     return issuer;
