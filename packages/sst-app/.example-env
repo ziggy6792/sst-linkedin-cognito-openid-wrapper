@@ -1,0 +1,6 @@
+LINKEDIN_CLIENT_ID=
+LINKEDIN_CLIENT_SECRET=
+COGNITO_REDIRECT_URI=
+LINKEDIN_API_URL=https://api.linkedin.com
+LINKEDIN_LOGIN_URL=https://www.linkedin.com
+LINKEDIN_SCOPE=r_liteprofile r_emailaddress

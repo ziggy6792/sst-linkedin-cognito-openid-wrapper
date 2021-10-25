@@ -27,3 +27,5 @@
 **/*.key.pub
 **/serverless-output.yml
 **/package-lock.json
+
+**/.env

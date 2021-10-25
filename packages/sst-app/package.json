@@ -7,7 +7,7 @@
     "test": "sst test",
     "start": "sst start",
     "build": "sst build",
-    "deploy": "sst deploy",
+    "deploy": "sst deploy --stage prod",
     "remove": "sst remove"
   },
   "eslintConfig": {
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@serverless-stack/cli": "0.48.0",
-    "@serverless-stack/resources": "0.48.0"
+    "@serverless-stack/resources": "0.48.0",
+    "dotenv": "^10.0.0"
   }
 }
