@@ -4,10 +4,10 @@ const github = require('./github');
 
 jest.mock('./config', () => ({
   COGNITO_REDIRECT_URI: 'COGNITO_REDIRECT_URI',
-  GITHUB_CLIENT_SECRET: 'GITHUB_CLIENT_SECRET',
-  GITHUB_CLIENT_ID: 'GITHUB_CLIENT_ID',
-  GITHUB_API_URL: 'GITHUB_API_URL',
-  GITHUB_LOGIN_URL: 'GITHUB_LOGIN_URL'
+  LINKEDIN_CLIENT_SECRET: 'LINKEDIN_CLIENT_SECRET',
+  LINKEDIN_CLIENT_ID: 'LINKEDIN_CLIENT_ID',
+  LINKEDIN_API_URL: 'LINKEDIN_API_URL',
+  LINKEDIN_LOGIN_URL: 'LINKEDIN_LOGIN_URL'
 }));
 
 describe('With an increased jasmine timeout', () => {
@@ -257,10 +257,10 @@ describe('With an increased jasmine timeout', () => {
             // OAuth required fields
             grant_type: 'authorization_code',
             redirect_uri: 'COGNITO_REDIRECT_URI',
-            client_id: 'GITHUB_CLIENT_ID',
+            client_id: 'LINKEDIN_CLIENT_ID',
             // GitHub Specific
             response_type: 'code',
-            client_secret: 'GITHUB_CLIENT_SECRET',
+            client_secret: 'LINKEDIN_CLIENT_SECRET',
             code: 'SOME_CODE'
           }
         }

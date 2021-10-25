@@ -10,15 +10,15 @@ Globals:
     Timeout: 15
     Environment:
       Variables:
-        GITHUB_CLIENT_ID:
+        LINKEDIN_CLIENT_ID:
           Ref: GitHubClientIdParameter
-        GITHUB_CLIENT_SECRET:
+        LINKEDIN_CLIENT_SECRET:
           Ref: GitHubClientSecretParameter
         COGNITO_REDIRECT_URI:
           Ref: CognitoRedirectUriParameter
-        GITHUB_API_URL:
+        LINKEDIN_API_URL:
           Ref: GitHubUrlParameter
-        GITHUB_LOGIN_URL:
+        LINKEDIN_LOGIN_URL:
           Ref: GitHubLoginUrlParameter
 
 Parameters:

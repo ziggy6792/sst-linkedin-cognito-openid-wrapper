@@ -75,7 +75,7 @@ const getTokens = (code, state, host) => {
 
       // ** JWT ID Token required fields **
       // iss - issuer https url
-      // aud - audience that this token is valid for (GITHUB_CLIENT_ID)
+      // aud - audience that this token is valid for (LINKEDIN_CLIENT_ID)
       // sub - subject identifier - must be unique
       // ** Also required, but provided by jsonwebtoken **
       // exp - expiry time for the id token (seconds since epoch in UTC)
