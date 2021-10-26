@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "lerna run start --stream --parallel",
-    "deploy": "cd packages/sst-app && yarn deploy"
+    "deploy": "lerna run build --scope @sst-openid-wrapper/cognito-openid-wrapper && cd packages/sst-app && yarn deploy"
   },
   "devDependencies": {
     "lerna": "^4.0.0"

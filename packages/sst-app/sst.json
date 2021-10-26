@@ -1,5 +1,5 @@
 {
-  "name": "cognito-openid-wrapper",
+  "name": "linkedin-openid",
   "region": "ap-southeast-1",
   "main": "stacks/index.js"
 }
