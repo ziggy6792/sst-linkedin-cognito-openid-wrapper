@@ -6,14 +6,6 @@ An example serverless app created with SST.
 
 [**Read the tutorial**](https://serverless-stack.com/examples/how-to-create-a-rest-api-with-serverless.html)
 
-Install the example.
-
-```bash
-$ npm init serverless-stack --example rest-api
-# Or with Yarn
-$ yarn create serverless-stack --example rest-api
-```
-
 ## Commands
 
 ### `npm run start`
